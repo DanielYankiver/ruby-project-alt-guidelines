@@ -31,6 +31,14 @@ class User < ActiveRecord::Base
         end 
     end 
 
+    def add_icecream_to_cart(icecream)
+        Icecreamorder.create(order: self.current_cart, icecream: icecream)
+    end 
+
+    def remove_icecream_from_cart(icecreamorder_id)
+        Icecreamorder.destroy(icecreamorder_id)
+    end
+
 
 
    
