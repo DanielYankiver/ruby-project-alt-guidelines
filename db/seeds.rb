@@ -1,10 +1,10 @@
 # Write in the data that needs to be populated within our database
 # puts "Hello, I'm creating..."
 
-# Icecream.destroy_all
-# # Icecreamorder.destroy_all
-# User.destroy_all
-# # Order.destroy_all
+Icecream.destroy_all
+Icecreamorder.destroy_all
+User.destroy_all
+Order.destroy_all
 
 # ICECREAM #
 chocolate = Icecream.create(flavor: "chocolate", price: 3)

@@ -7,22 +7,31 @@ class User < ActiveRecord::Base
 
     def current_cart
         # Look into order time and maybe add a conditional 
-        orders.find_or_create_by(checked_out: false, order_time: Time.now)
+        #orders.find_or_create_by(checked_out: false, order_time: Time.now)
+        if orders.find_by(checked_out: false)
+            orders.find_by(checked_out: false)
+        else 
+            orders.create(checked_out: false, order_time: Time.now)
+        end 
+
     end
 
-    # def check_out_current_cart 
+    def check_out_current_cart 
+        puts "Welcome, #{self.username}!"
+        puts "Here is all of the icecream you have in your cart:"
+        self.display_cart
+        puts "Let's checkout!"
+        self.current_cart.update(checked_out: true)
+    end 
 
 
-    # end 
+    def display_cart 
+        self.current_cart.icecreamorders.each do |icecreamorder|
+            puts "#{icecreamorder.icecream.flavor}"
+        end 
+    end 
 
 
-    # def display_cart 
-    #     binding.pry
-    #     self.current_cart.icecreamorders.each do |icecreamorder|
-    #         puts "Order number: #{icecreamorder.id}. Flavor: #{icecreamorder.icecream.flavor}"
-    #         binding.pry
-    #     end 
-    # end 
 
    
 
