@@ -27,14 +27,14 @@ Your **minimum requirements** for this project are to build a Command Line App t
 
 ## Project Overview (Timeline)
 
-### Phase 1: The Setup
+<!-- ### Phase 1: The Setup
 
 This should take approximately **half a day**.
 
-Do not begin coding until you have your pitch approved by an instructor. Do not overthink this. Do not spend your whole day whiteboarding out a schema.
+Do not begin coding until you have your pitch approved by an instructor. Do not overthink this. Do not spend your whole day whiteboarding out a schema. -->
 
 #### Planning
-
+<!-- 
 Your **first goal** should be to decide on your models and determine the relationships between them. You **must have a minimum of three models consisting of at least _one_ many-to-many relationship.** Here are some ideas:
 
 * `Restaurant`, `User`, `Review`: (Yelp domain) A restaurant has many users and a user has many restaurants; reviews belongs to restaurant and to user.
@@ -56,12 +56,12 @@ For example, if we were creating an app to review restaurants on Yelp, we might 
 * As a user, I want to be able to write a review for a restaurant. (**Create**)
 * As a user, I want to enter a restaurant and be given user reviews of that restaurant. (**Read**)
 * As a user, I should be able to edit my restaurant review. (**Update**)
-* As a user, I want to be able to delete one of my restaurant reviews. (**Delete**)
+* As a user, I want to be able to delete one of my restaurant reviews. (**Delete**) -->
 
 
 #### The Pitch
 
-Projects need to be approved prior to launching into them, so take some time to brainstorm project options that will fulfill the requirements above. When you are ready to pitch, be sure to bring the following with you when you sit down with your instructor(s):
+<!-- Projects need to be approved prior to launching into them, so take some time to brainstorm project options that will fulfill the requirements above. When you are ready to pitch, be sure to bring the following with you when you sit down with your instructor(s):
 
 * schema
 * user stories
@@ -72,11 +72,11 @@ As you pitch, think about how you would explain your [Minimum Viable Product (MV
 
 _**You do not need to have your MVP figured out before your pitch.**_ We will help you scope your project idea before approving it. However, this is a very useful skill to begin building for the future.
 
-**Get your data modeling approved by an instructor before moving on to the next step.**
+**Get your data modeling approved by an instructor before moving on to the next step.** -->
 
 #### Setup
 
-Fork and clone this project repository. As you work, be sure to create a flow of:
+<!-- Fork and clone this project repository. As you work, be sure to create a flow of: -->
 
 * creating a branch to work on a new feature,
 * committing and pushing to your branch,
@@ -84,7 +84,7 @@ Fork and clone this project repository. As you work, be sure to create a flow of
 * Then delete your old branch after successfully merging to `master`.
 * Rinse and repeat.
 
-Before you start building, take a look at the files you have available in this repo.
+<!-- Before you start building, take a look at the files you have available in this repo.
 
 * In the main directory, you've got a `Gemfile` that gives you access to `activerecord`, `pry`, `rake`, and `sqlite3`.
   * Remember to `bundle install`!
@@ -94,21 +94,21 @@ Before you start building, take a look at the files you have available in this r
 
 **Note:** There is no `spec` directory. Your goal is to use [Behavior Driven Development (BDD)](https://en.wikipedia.org/wiki/Behavior-driven_development) to confirm that your code is doing what it should. This means instead of running `rspec` or `learn`, you should frequently be opening up the `rake console` and confirming that your methods and associations work.
 
----
+--- -->
 
 ### Phase 2: Scaffolding
 
-This should take approximately **3/4 of a day**.
+<!-- This should take approximately **3/4 of a day**. -->
 
 #### Data Models
 
-Make a new file for each model in your `lib` folder. What's the naming convention for a model filename? Check out previous labs for a reminder. Remember that `activerecord` gem from our `Gemfile`? Make sure that every model inherits from `ActiveRecord::Base`.
+<!-- Make a new file for each model in your `lib` folder. What's the naming convention for a model filename? Check out previous labs for a reminder. Remember that `activerecord` gem from our `Gemfile`? Make sure that every model inherits from `ActiveRecord::Base`.
 
-Be sure to include the relationships between your models. The [Rails Guides ActiveRecord Documentation](http://guides.rubyonrails.org/association_basics.html) is a great source if you get stuck! Check out the `has_many :through` section when setting up your many-to-many relationship.
+Be sure to include the relationships between your models. The [Rails Guides ActiveRecord Documentation](http://guides.rubyonrails.org/association_basics.html) is a great source if you get stuck! Check out the `has_many :through` section when setting up your many-to-many relationship. -->
 
 #### Migrations
 
-Create your database and migrations in the terminal (keeping in mind that you have Rake available to you! Run `rake -T` in your terminal for a refresher.) What are the naming conventions for migration files and table names?
+<!-- Create your database and migrations in the terminal (keeping in mind that you have Rake available to you! Run `rake -T` in your terminal for a refresher.) What are the naming conventions for migration files and table names?
 
 Now is a great time to open up your console in the terminal and make sure everything's working properly. Your database is empty at this point, so start by creating a new row in your `users` table. For the Yelp example, we'd do something like this:
 
@@ -130,10 +130,10 @@ Woah! What did we just do there?
 
 The first part is simple: we added the a restaurant to our `restaurants` table. Then we created a new relationship between our user, _Mike_, and our new restaurant, _Ming's Garden_. What is this relationship? Why that relationship is _Mike_ reviewing _Ming's Garden_! Because we setup our relationships correctly in Active Record, _Mike_ can view both his reviews _and_ the restaurants that he reviewed! Amazing!! High fives all around.
 
-![celebration](https://media.giphy.com/media/Is1O1TWV0LEJi/giphy.gif)
+![celebration](https://media.giphy.com/media/Is1O1TWV0LEJi/giphy.gif) -->
 
 #### Seeding the Database
-
+<!-- 
 At this point, we could continue adding items to our database through the console, but let's be real. There are hundreds of thousands of restaurants, if not more. Entering them individually would take forever!! There must be a better way...
 
 Enter the seeds file. What is a seed file? It's a file (`seeds.rb`), located in the `db` folder, where you create new instances of your classes and save them to your database. There are several ways this could happen. You could iterate over a csv file, for example, pulling out relevant data, and creating a new row in your database for every row in the file.
@@ -158,7 +158,7 @@ This is great for randomly creating data and randomly associating it once, but t
 
 **Your goal** is to make sure you have enough data to play around with once you get your command line interface up and running. Five to ten instances of each model, as well as the corresponding relationships should be enough. You can always add more later.
 
-Once your file is ready, run `rake -T` to see which rake task you can use to seed your database.
+Once your file is ready, run `rake -T` to see which rake task you can use to seed your database. -->
 
 ---
 

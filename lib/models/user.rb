@@ -39,8 +39,41 @@ class User < ActiveRecord::Base
         Icecreamorder.destroy(icecreamorder_id)
     end
 
+    
+
+    def self.login_a_user
+        puts "You're one scoop away from picking your ice cream!"
+        puts "What\'s your username?"
+        username = gets.chomp
+        puts "What\'s your password?"
+        password = gets.chomp
+
+        user = User.find_by(username: username, password: password)
+
+        if user.nil?
+            puts "Sorry, nobody with that username and password exists!"
+        else
+            user
+        end
+    end
+
+    def self.register_a_user
+        puts "What is your username?"
+        username = gets.chomp
+        puts "What is your password?"
+        password = gets.chomp
+
+        user = User.find_by(username: username)
+
+        if user
+            puts "Sorry, that username is already taken, scoop again..."
+        else
+            User.create(username: username, password: password)
+        end
+    end
+
 
 
    
-
+    
 end
