@@ -6,11 +6,10 @@
 4. Menu: 
     - View all falvors
         - flavors  
-    - Show current cart (current_cart)
-        - back to menu
-        - checkout current cart (check_out_current_cart)
     - view past orders (past_orders)
         - back to menu 
+    - Show current cart (current_cart)
+        - checkout current cart (check_out_current_cart)
     - Exit  
 5. View all flavors 
     - shows flavors 

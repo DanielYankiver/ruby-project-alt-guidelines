@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
 
 
     def display_cart 
-        self.current_cart.icecreamorders.each do |icecreamorder|
-            puts "#{icecreamorder.icecream.flavor}"
+        self.current_cart.icecreamorders.map do |icecreamorder|
+            icecreamorder.icecream.flavor
         end 
     end 
 
