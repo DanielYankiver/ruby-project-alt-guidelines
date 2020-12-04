@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
     end
 
     def check_out_current_cart 
-        puts "Welcome, #{self.username}!"
         puts "Here is all of the icecream you have in your cart:"
         self.display_cart
         puts "Let's checkout!"
@@ -73,7 +72,5 @@ class User < ActiveRecord::Base
     end
 
 
-
-   
     
 end

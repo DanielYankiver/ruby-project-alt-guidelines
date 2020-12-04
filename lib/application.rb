@@ -15,6 +15,7 @@ class Application
         prompt.select("Would you like to register or login?") do |menu|
             menu.choice "Register", -> {register_helper}
             menu.choice "Login", -> {login_helper}
+            menu.choice "Exit"
         end
     end
 
@@ -31,17 +32,38 @@ class Application
         # Gets the most up to date info about the user
         system 'clear'
         # "clears" the terminal
-        # sleep 5
-        # Wait 5 seconds and then execute
         prompt.select("Welcome, #{user.username}! What do you want to do?") do |menu|
-            menu.choice "See my past orders", -> {past_orders}
-            menu.choice "Add ice cream to cart", -> {see_all_pets}
-            menu.choice "Smell you later", -> {smell_you_later}
+            menu.choice "View all flavors", -> {pick_flavor}
+            menu.choice "See my past orders", -> {see_my_past_orders}
+            menu.choice "Show current cart", -> {current_cart}
+            menu.choice "Exit App"
             # menu.choice "WHAT USER SEES", -> {HELPER_METHOD }
         end
     end
 
-    
+
+
+    def pick_flavor
+        prompt.select("What flavor do you want to add to your cart?") do |menu|
+            # menu.choice "Register", -> {register_helper}
+            # menu.choice "Login", -> {login_helper}
+            # menu.choice "Exit"
+            Icecream.all.map do |icecream|
+                menu.choice "#{icecream.flavor}", -> {user.add_icecream_to_cart(icecream)}
+            end
+            
+        end
+        puts "You've added #{user.display_cart.last.icecream.flavor} to your cart!"
+        sleep 5
+        main_menu
+    end
+
+    def see_my_past_orders
+        # puts user.past_orders.icecreamorder.icecream.flavor
+        user.past_orders.each |order|
+            puts order.icecream.flavor
+        end
+    end 
 
 
 end 
