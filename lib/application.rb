@@ -58,7 +58,7 @@ class Application
     end
 
     def see_my_past_orders
-        # puts user.past_orders.icecreamorder.icecream.flavor
+        # need to add option for new user 
         user.past_orders.each do |order|
             order.icecreams.each do |icecream|
                 puts "You scooped #{icecream.flavor} on #{order.order_time} :) "
@@ -81,12 +81,23 @@ class Application
             prompt.select("What would you like to do next #{user.username}?") do |menu|
                 menu.choice "Pick Another Scoop", -> {pick_flavor}
                 menu.choice "Go to Checkout", -> {checkout_method}
-                menu.choice "Remove an Item", -> {remove_method}
+                menu.choice "Remove an Item", -> {remove_flavor_from_cart}
                 menu.choice "Main Menu", -> {main_menu}
                 menu.choice "Exit App"
             end
         end 
-
     end
+
+    def remove_flavor_from_cart
+        puts "What falvor would you like to remove?"
+        chosen_flavor = gets.chomp
+        icecreamorder_id = user.current_cart.icecreamorders.id.find {|order| order.icecream.flavor == chosen_flavor} 
+        # user.remove_icecream_from_cart(icecreamorder_id)
+        # user.remove_icecream_from_cart(icecreamorder_id)
+        Icecreamorder.destroy(icecreamorder_id)
+        # Icecreamorder.destroy(id: icecreamorder_id)
+        # USE AR METHODS!!!git  
+
+    end 
 
 end 

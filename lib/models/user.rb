@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
     def check_out_current_cart 
         puts "Here is all of the icecream you have in your cart:"
-        self.display_cart
+        puts self.display_cart
         puts "Let's checkout!"
         self.current_cart.update(checked_out: true)
     end 
@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
     def remove_icecream_from_cart(icecreamorder_id)
         Icecreamorder.destroy(icecreamorder_id)
     end
+
 
     
 
