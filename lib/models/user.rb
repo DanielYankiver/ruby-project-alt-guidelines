@@ -17,10 +17,15 @@ class User < ActiveRecord::Base
     end
 
     def check_out_current_cart 
-        puts "Here is all of the icecream you have in your cart:"
-        puts self.display_cart
-        puts "Let's checkout!"
+        puts "Your order has been submitted!" 
+        puts "The following ice creams will be ready shortly:"
+        puts self.display_cart 
+        puts "Total: $#{current_cart.total_price}"
         self.current_cart.update(checked_out: true)
+        puts "Thank you for SCOOPING with us"
+        puts "Scoop you later :)"
+        sleep 7 
+        main_menu
     end 
 
 

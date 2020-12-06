@@ -51,7 +51,7 @@ class Application
             end
             
         end
-        puts "You've added #{user.display_cart.last} to your cart!"
+        puts "You've added #{user.display_cart.last} ice cream to your cart!"
         #puts "You've added #{user.display_cart.last.icecream.flavor} to your cart!"
         sleep 5
         main_menu
@@ -73,14 +73,13 @@ class Application
         if !user.display_cart.any?
             puts "There is nothing in your cart #{user.username}!"
             puts "Please pick a flavor"
-            sleep 3
             pick_flavor
         else 
             puts "Looks like you have items in your cart:" 
             puts user.display_cart
             prompt.select("What would you like to do next #{user.username}?") do |menu|
                 menu.choice "Pick Another Scoop", -> {pick_flavor}
-                menu.choice "Go to Checkout", -> {checkout_method}
+                menu.choice "Checkout", -> {checkout}
                 menu.choice "Remove an Item", -> {remove_flavor_from_cart}
                 menu.choice "Main Menu", -> {main_menu}
                 menu.choice "Exit App"
@@ -88,16 +87,39 @@ class Application
         end 
     end
 
-    def remove_flavor_from_cart
-        puts "What falvor would you like to remove?"
-        chosen_flavor = gets.chomp
-        icecreamorder_id = user.current_cart.icecreamorders.id.find {|order| order.icecream.flavor == chosen_flavor} 
-        # user.remove_icecream_from_cart(icecreamorder_id)
-        # user.remove_icecream_from_cart(icecreamorder_id)
-        Icecreamorder.destroy(icecreamorder_id)
-        # Icecreamorder.destroy(id: icecreamorder_id)
-        # USE AR METHODS!!!git  
+    def checkout
+        user.check_out_current_cart 
+    end
 
+    def remove_flavor_from_cart
+        user.reload
+        # Gets the most up to date info about the user
+        system 'clear'
+        # "clears" the terminal
+        prompt.select("What flavor would you like to remove #{user.username}?") do |menu|
+            user.current_cart.icecreams.each do |icecream|
+                menu.choice "#{icecream.flavor}", -> {user.remove_icecream_from_cart(something.id)}
+            end
+        end
     end 
+
+ 
+
+
+
+        
+        
+        #user.current_cart.icecreamorders.ids     
+        # icecreamorder_instance = user.current_cart.icecreamorders.where(flavor: chosen_flavor)
+        # icecreamorder_instance = user.current_cart.icecreams.where(flavor: chosen_flavor)
+        # puts icecreamorder_instance
+        # user.current_cart.delete_by(flavor: chosen_flavor)
+        # user.remove_icecream_from_cart(icecreamorder_instance)
+        # user.remove_icecream_from_cart(icecreamorder_instance)
+
+        # Icecreamorder.destroy_by(icecreamorder_instance.id)
+        
+        # Icecreamorder.destroy(id: icecreamorder_instance)
+        # USE AR METHODS!!!git  
 
 end 
