@@ -43,13 +43,14 @@ class Application
         system 'clear'
         prompt.select("What flavor do you want to add to your cart?") do |menu|
             Icecream.all.map do |icecream|
-                menu.choice "#{icecream.flavor}", -> {user.add_icecream_to_cart(icecream)}
+                menu.choice "#{icecream.flavor}: $#{icecream.price}", -> {user.add_icecream_to_cart(icecream)}
             end 
         end
         puts "You've added #{user.display_cart.last} ice cream to your cart!"
         sleep 3
         main_menu
     end
+    
 
     def see_my_past_orders
         # need to add option for new user 

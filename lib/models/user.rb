@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
         puts "The following ice creams will be ready shortly:"
         puts ""
         puts self.display_cart 
+        puts ""
         puts "Total: $#{current_cart.total_price}"
         puts ""
         self.current_cart.update(checked_out: true)
