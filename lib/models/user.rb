@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
         puts "Total: $#{current_cart.total_price}"
         puts ""
         self.current_cart.update(checked_out: true)
-        puts "Thank you for SCOOPING with us. Scoop you later :)"
+        puts "Thank you for SCOOPING with us. Scoop you later 🍦"
     end 
 
 

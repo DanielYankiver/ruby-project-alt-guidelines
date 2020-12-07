@@ -7,12 +7,16 @@ User.destroy_all
 Order.destroy_all
 
 # ICECREAM #
-chocolate = Icecream.create(flavor: "chocolate", price: 3)
-cookies = Icecream.create(flavor: "cookies and cream", price: 4)
-coffee = Icecream.create(flavor: "coffee", price: 3)
-vanilla = Icecream.create(flavor: "vanilla", price: 2)
-strawberry = Icecream.create(flavor: "organic strawberry", price: 5)
-mint = Icecream.create(flavor: "mint chocolate chip", price: 4)
+chocolate = Icecream.create(flavor: "🍫 CHOCOLATE", price: 3)
+cookies = Icecream.create(flavor: "🍪 COOKIES AND CREAM", price: 4)
+coffee = Icecream.create(flavor: "🤎 COFFEE", price: 3)
+vanilla = Icecream.create(flavor: "🍦 VANILLA", price: 2)
+organic_strawberry = Icecream.create(flavor: "🍓 ORGANIC STRAWBERRY", price: 5)
+mint = Icecream.create(flavor: "🌱 MINT CHOCOLATE CHIP", price: 4)
+cherry_cheesecake = Icecream.create(flavor: "🍰 CHERRY CHEESECAKE", price: 5)
+pistachio = Icecream.create(flavor: "💚 PISTACHIO", price: 4)
+vegan_chocolate_chip = Icecream.create(flavor: "🍪 VEGAN CHOCOLATE CHIP", price: 7)
+vegan_ = Icecream.create(flavor: "🍵 VEGAN COCONUT MATCHA", price: 7)
 
 # USER # 
 will = User.create(username: "will", password: "prince123")
@@ -34,7 +38,7 @@ current_order2 = Order.create(checked_out: false, user: carlton, order_time: Tim
 # ICECREAM ORDER # 
 
 Icecreamorder.create(order: past_order1, icecream: cookies)
-Icecreamorder.create(order: past_order1, icecream: strawberry)
+Icecreamorder.create(order: past_order1, icecream: organic_strawberry)
 Icecreamorder.create(order: past_order2, icecream: coffee)
 Icecreamorder.create(order: past_order3, icecream: cookies)
 Icecreamorder.create(order: past_order2, icecream: mint)

@@ -8,11 +8,29 @@ class Application
     end
 
     def greet
+        system 'clear'
         puts 'Welcome to What\'s the Scoop, where all of your ice dreams come true!'
+        puts render_ascii_art
+        puts "Loading the scoops shop🍦🍦🍦"
+        sleep 2
+        system 'clear'
+        puts render_ascii_art
+        puts "Loading the scoops shop🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦"
+        sleep 1
+        system 'clear'
+        puts render_ascii_art
+        puts "Loading the scoops shop🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦"
+        sleep 1
+        system 'clear'
+        puts render_ascii_art
+        puts "Loading the scoops shop🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦 %100"
+        sleep 1
     end
 
     def login_register
         system 'clear'
+        print TTY::Box.frame "          WHAT'S THE SCOOP?         "
+        puts ""
         prompt.select("Would you like to login or register?") do |menu|
             menu.choice "Login", -> {login_helper}
             menu.choice "Register", -> {register_helper}
@@ -41,6 +59,7 @@ class Application
 
     def pick_flavor
         system 'clear'
+        print TTY::Box.frame "          SCOOPS MENU         "
         prompt.select("What flavor do you want to add to your cart?") do |menu|
             Icecream.all.map do |icecream|
                 menu.choice "#{icecream.flavor}: $#{icecream.price}", -> {user.add_icecream_to_cart(icecream)}
@@ -59,7 +78,7 @@ class Application
         puts " "
         user.past_orders.each do |order|
             order.icecreams.each do |icecream|
-                puts "You scooped #{icecream.flavor} on #{order.order_time.strftime("%d/%m/%Y")} at #{order.order_time.strftime("%I:%M %p")}"
+                puts "You picked #{icecream.flavor} on #{order.order_time.strftime("%d/%m/%Y")} at #{order.order_time.strftime("%I:%M %p")}"
             end 
         end
         sleep 2
@@ -80,9 +99,9 @@ class Application
             sleep 3
             pick_flavor
         else 
-            puts "These are the scoops in your cart:" 
+            puts "These are the icecreams in your cart:" 
             puts ""
-            user.display_cart.map {|item| puts "- #{item}"}
+            user.display_cart.map {|item| puts "#{item}"}
             puts ""
             prompt.select("What would you like to do next #{user.username}?") do |menu|
                 menu.choice "Pick Another Scoop", -> {pick_flavor}
@@ -96,7 +115,8 @@ class Application
 
     def checkout
         user.check_out_current_cart 
-        sleep 5
+        puts render_ascii_art
+        sleep 7
         main_menu
     end
 
@@ -115,10 +135,16 @@ class Application
 
     def exit_app 
         system 'clear'
-        puts "Scoop ya later!"
+        puts "🍦 Scoop you later 🍦"
         sleep 2
         exit
     end
 
+    def render_ascii_art
+        File.readlines("lib/Icecream.txt") do |line|
+          puts line
+        end
+    end
+    
 
 end 
