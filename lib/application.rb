@@ -8,23 +8,24 @@ class Application
     end
 
     def greet
+        clear_welcome_ascii
+        puts "Loading the scoops shop🍦🍦🍦"
+        sleep 1
+        clear_welcome_ascii
+        puts "Loading the scoops shop🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦"
+        sleep 1
+        clear_welcome_ascii
+        puts "Loading the scoops shop🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦"
+        sleep 1
+        clear_welcome_ascii
+        puts "Loading the scoops shop🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦 %100"
+        sleep 1
+    end
+
+    def clear_welcome_ascii 
         system 'clear'
         puts 'Welcome to What\'s the Scoop, where all of your ice dreams come true!'
         puts render_ascii_art
-        puts "Loading the scoops shop🍦🍦🍦"
-        sleep 2
-        system 'clear'
-        puts render_ascii_art
-        puts "Loading the scoops shop🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦"
-        sleep 1
-        system 'clear'
-        puts render_ascii_art
-        puts "Loading the scoops shop🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦"
-        sleep 1
-        system 'clear'
-        puts render_ascii_art
-        puts "Loading the scoops shop🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦 %100"
-        sleep 1
     end
 
     def login_register
@@ -50,9 +51,9 @@ class Application
         user.reload
         system 'clear'
         prompt.select("Welcome, #{user.username}! What do you want to do?") do |menu|
-            menu.choice "View all flavors and Pick a scoop", -> {pick_flavor}
-            menu.choice "See my past orders", -> {see_my_past_orders}
-            menu.choice "Show current cart", -> {show_current_cart}
+            menu.choice "View All Flavors and Pick a Scoop", -> {pick_flavor}
+            menu.choice "See My Past Orders", -> {see_my_past_orders}
+            menu.choice "Show Current Cart", -> {show_current_cart}
             menu.choice "Exit App", -> {exit_app}
         end
     end
@@ -74,7 +75,7 @@ class Application
     def see_my_past_orders
         # need to add option for new user 
         system 'clear'
-        puts "Past orders:"
+        puts "Past Orders:"
         puts " "
         user.past_orders.each do |order|
             order.icecreams.each do |icecream|
@@ -84,8 +85,8 @@ class Application
         sleep 2
         puts " "
         prompt.select("What do you want to do next #{user.username}?") do |menu|
-            menu.choice "View all flavors and Pick a scoop", -> {pick_flavor}
-            menu.choice "Show current cart", -> {show_current_cart}
+            menu.choice "View All Flavors and Pick a Scoop", -> {pick_flavor}
+            menu.choice "Show Current Cart", -> {show_current_cart}
             menu.choice "Exit App", -> {exit_app}
         end
     end 
@@ -94,16 +95,16 @@ class Application
         system 'clear'
         user.current_cart
         if !user.display_cart.any?
-            puts "There is nothing in your cart #{user.username}!"
+            puts "There is nothing in your cart, #{user.username} :("
             puts "Please pick a flavor"
             sleep 3
             pick_flavor
         else 
-            puts "These are the icecreams in your cart:" 
+            puts "These are the ice creams in your cart:" 
             puts ""
             user.display_cart.map {|item| puts "#{item}"}
             puts ""
-            prompt.select("What would you like to do next #{user.username}?") do |menu|
+            prompt.select("What would you like to do next, #{user.username}?") do |menu|
                 menu.choice "Pick Another Scoop", -> {pick_flavor}
                 menu.choice "Checkout", -> {checkout}
                 menu.choice "Remove an Item", -> {remove_flavor_from_cart}
@@ -123,7 +124,7 @@ class Application
     def remove_flavor_from_cart
         user.reload
         system 'clear'
-        prompt.select("What flavor would you like to remove #{user.username}?") do |menu|
+        prompt.select("What flavor would you like to remove, #{user.username}?") do |menu|
             user.current_cart.icecreamorders.each do |icecreamorder|
                 menu.choice "#{icecreamorder.icecream.flavor}", -> {user.remove_icecream_from_cart(icecreamorder.id)}
             end
@@ -135,7 +136,7 @@ class Application
 
     def exit_app 
         system 'clear'
-        puts "🍦 Scoop you later 🍦"
+        puts "🍦🍦🍦  SCOOP YOU LATER  🍦🍦🍦"
         sleep 2
         exit
     end

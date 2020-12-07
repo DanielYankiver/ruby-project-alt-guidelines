@@ -19,12 +19,9 @@ These are the last things we want to change or include:
     - checkout page 
     - try animated instead of still  -->
 
-7. hide password entry with *****
 
-8. Add checkout to main menu 
-    - with conditional of if nothing is in the cart we let them know 
-
-9. Refactor methods 
+7. Refactor methods 
     - make our program clean and DRY
+    - write a method that makes welcome sleep and acii 
 
-10. Write a READ.ME 
+8. Write a READ.ME 

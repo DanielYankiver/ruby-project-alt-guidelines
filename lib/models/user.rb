@@ -53,7 +53,6 @@ class User < ActiveRecord::Base
         puts " "
         puts "What\'s your username?"
         username = gets.chomp
-        puts " "
         puts "What\'s your password?"
         password = gets.chomp
 
@@ -72,10 +71,10 @@ class User < ActiveRecord::Base
 
     def self.register_a_user
         puts " "
+        puts "You're one scoop away from picking your ice cream!"
+        puts " "
         puts "What is your username?"
-        puts " "
         username = gets.chomp
-        puts " "
         puts "What is your password?"
         password = gets.chomp
 
