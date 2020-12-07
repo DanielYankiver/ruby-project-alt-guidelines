@@ -8,26 +8,26 @@ class User < ActiveRecord::Base
     end
 
     def current_cart
-        # Look into order time and maybe add a conditional 
-        #orders.find_or_create_by(checked_out: false, order_time: Time.now)
         if orders.find_by(checked_out: false)
             orders.find_by(checked_out: false)
         else 
-            orders.create(checked_out: false, order_time: Time.now)
+            t = Time.now
+            orders.create(checked_out: false, order_time: t)
         end 
 
     end
 
     def check_out_current_cart 
+        system 'clear'
         puts "Your order has been submitted!" 
+        puts ""
         puts "The following ice creams will be ready shortly:"
+        puts ""
         puts self.display_cart 
         puts "Total: $#{current_cart.total_price}"
+        puts ""
         self.current_cart.update(checked_out: true)
-        puts "Thank you for SCOOPING with us"
-        puts "Scoop you later :)"
-        sleep 7 
-        #main_menu
+        puts "Thank you for SCOOPING with us. Scoop you later :)"
     end 
 
 
@@ -62,7 +62,8 @@ class User < ActiveRecord::Base
             puts " "
             puts "Sorry, nobody with that username and password exists!"
             sleep 3
-            #main_menu
+            system 'clear'
+            login_a_user
         else
             user
         end

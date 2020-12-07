@@ -16,7 +16,7 @@ class Application
         prompt.select("Would you like to login or register?") do |menu|
             menu.choice "Login", -> {login_helper}
             menu.choice "Register", -> {register_helper}
-            menu.choice "Exit"
+            menu.choice "Exit", -> {exit_app}
         end
     end
 
@@ -30,32 +30,23 @@ class Application
 
     def main_menu
         user.reload
-        # Gets the most up to date info about the user
         system 'clear'
-        # "clears" the terminal
         prompt.select("Welcome, #{user.username}! What do you want to do?") do |menu|
             menu.choice "View all flavors and Pick a scoop", -> {pick_flavor}
             menu.choice "See my past orders", -> {see_my_past_orders}
             menu.choice "Show current cart", -> {show_current_cart}
-            menu.choice "Exit App"
-            # menu.choice "WHAT USER SEES", -> {HELPER_METHOD }
+            menu.choice "Exit App", -> {exit_app}
         end
     end
 
     def pick_flavor
         system 'clear'
         prompt.select("What flavor do you want to add to your cart?") do |menu|
-            # menu.choice "Register", -> {register_helper}
-            # menu.choice "Login", -> {login_helper}
-            # menu.choice "Exit"
-            menu.choice "Back to Main Menu", -> {main_menu}
             Icecream.all.map do |icecream|
                 menu.choice "#{icecream.flavor}", -> {user.add_icecream_to_cart(icecream)}
-            end
-            
+            end 
         end
         puts "You've added #{user.display_cart.last} ice cream to your cart!"
-        #puts "You've added #{user.display_cart.last.icecream.flavor} to your cart!"
         sleep 3
         main_menu
     end
@@ -67,11 +58,16 @@ class Application
         puts " "
         user.past_orders.each do |order|
             order.icecreams.each do |icecream|
-                puts "You scooped #{icecream.flavor} on #{order.order_time} :) "
+                puts "You scooped #{icecream.flavor} on #{order.order_time.strftime("%d/%m/%Y")} at #{order.order_time.strftime("%I:%M %p")}"
             end 
         end
-        sleep 5
-        main_menu
+        sleep 2
+        puts " "
+        prompt.select("What do you want to do next #{user.username}?") do |menu|
+            menu.choice "View all flavors and Pick a scoop", -> {pick_flavor}
+            menu.choice "Show current cart", -> {show_current_cart}
+            menu.choice "Exit App", -> {exit_app}
+        end
     end 
 
     def show_current_cart 
@@ -80,6 +76,7 @@ class Application
         if !user.display_cart.any?
             puts "There is nothing in your cart #{user.username}!"
             puts "Please pick a flavor"
+            sleep 3
             pick_flavor
         else 
             puts "These are the scoops in your cart:" 
@@ -91,47 +88,36 @@ class Application
                 menu.choice "Checkout", -> {checkout}
                 menu.choice "Remove an Item", -> {remove_flavor_from_cart}
                 menu.choice "Main Menu", -> {main_menu}
-                menu.choice "Exit App"
+                menu.choice "Exit App", -> {exit_app}
             end
         end 
     end
 
     def checkout
         user.check_out_current_cart 
-        sleep 10
+        sleep 5
         main_menu
     end
 
     def remove_flavor_from_cart
         user.reload
-        # Gets the most up to date info about the user
         system 'clear'
-        # "clears" the terminal
         prompt.select("What flavor would you like to remove #{user.username}?") do |menu|
             user.current_cart.icecreamorders.each do |icecreamorder|
                 menu.choice "#{icecreamorder.icecream.flavor}", -> {user.remove_icecream_from_cart(icecreamorder.id)}
             end
         end
+        puts "Your cart has been updated!"
+        sleep 2 
         main_menu
     end 
 
- 
+    def exit_app 
+        system 'clear'
+        puts "Scoop ya later!"
+        sleep 2
+        exit
+    end
 
-
-
-        
-        
-        #user.current_cart.icecreamorders.ids     
-        # icecreamorder_instance = user.current_cart.icecreamorders.where(flavor: chosen_flavor)
-        # icecreamorder_instance = user.current_cart.icecreams.where(flavor: chosen_flavor)
-        # puts icecreamorder_instance
-        # user.current_cart.delete_by(flavor: chosen_flavor)
-        # user.remove_icecream_from_cart(icecreamorder_instance)
-        # user.remove_icecream_from_cart(icecreamorder_instance)
-
-        # Icecreamorder.destroy_by(icecreamorder_instance.id)
-        
-        # Icecreamorder.destroy(id: icecreamorder_instance)
-        # USE AR METHODS!!!git  
 
 end 
