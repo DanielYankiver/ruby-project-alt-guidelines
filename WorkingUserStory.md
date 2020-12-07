@@ -26,8 +26,8 @@
     - see total price 
     - Submit an order  
 7. After submit order page 
-    - Cancel your order
     - Create a new order 
     - See past orders 
+    - Cancel order 
     - Order status 
     - Exit the app 

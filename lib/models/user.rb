@@ -1,3 +1,5 @@
+
+
 class User < ActiveRecord::Base
     has_many :orders
 
@@ -25,7 +27,7 @@ class User < ActiveRecord::Base
         puts "Thank you for SCOOPING with us"
         puts "Scoop you later :)"
         sleep 7 
-        main_menu
+        #main_menu
     end 
 
 
@@ -44,27 +46,34 @@ class User < ActiveRecord::Base
     end
 
 
-    
-
     def self.login_a_user
+        puts " "
         puts "You're one scoop away from picking your ice cream!"
+        puts " "
         puts "What\'s your username?"
         username = gets.chomp
+        puts " "
         puts "What\'s your password?"
         password = gets.chomp
 
         user = User.find_by(username: username, password: password)
 
         if user.nil?
+            puts " "
             puts "Sorry, nobody with that username and password exists!"
+            sleep 3
+            #main_menu
         else
             user
         end
     end
 
     def self.register_a_user
+        puts " "
         puts "What is your username?"
+        puts " "
         username = gets.chomp
+        puts " "
         puts "What is your password?"
         password = gets.chomp
 

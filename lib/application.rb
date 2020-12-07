@@ -12,9 +12,10 @@ class Application
     end
 
     def login_register
-        prompt.select("Would you like to register or login?") do |menu|
-            menu.choice "Register", -> {register_helper}
+        system 'clear'
+        prompt.select("Would you like to login or register?") do |menu|
             menu.choice "Login", -> {login_helper}
+            menu.choice "Register", -> {register_helper}
             menu.choice "Exit"
         end
     end
@@ -42,10 +43,12 @@ class Application
     end
 
     def pick_flavor
+        system 'clear'
         prompt.select("What flavor do you want to add to your cart?") do |menu|
             # menu.choice "Register", -> {register_helper}
             # menu.choice "Login", -> {login_helper}
             # menu.choice "Exit"
+            menu.choice "Back to Main Menu", -> {main_menu}
             Icecream.all.map do |icecream|
                 menu.choice "#{icecream.flavor}", -> {user.add_icecream_to_cart(icecream)}
             end
@@ -53,30 +56,36 @@ class Application
         end
         puts "You've added #{user.display_cart.last} ice cream to your cart!"
         #puts "You've added #{user.display_cart.last.icecream.flavor} to your cart!"
-        sleep 5
+        sleep 3
         main_menu
     end
 
     def see_my_past_orders
         # need to add option for new user 
+        system 'clear'
+        puts "Past orders:"
+        puts " "
         user.past_orders.each do |order|
             order.icecreams.each do |icecream|
                 puts "You scooped #{icecream.flavor} on #{order.order_time} :) "
             end 
         end
-        sleep 7
+        sleep 5
         main_menu
     end 
 
     def show_current_cart 
+        system 'clear'
         user.current_cart
         if !user.display_cart.any?
             puts "There is nothing in your cart #{user.username}!"
             puts "Please pick a flavor"
             pick_flavor
         else 
-            puts "Looks like you have items in your cart:" 
-            puts user.display_cart
+            puts "These are the scoops in your cart:" 
+            puts ""
+            user.display_cart.map {|item| puts "- #{item}"}
+            puts ""
             prompt.select("What would you like to do next #{user.username}?") do |menu|
                 menu.choice "Pick Another Scoop", -> {pick_flavor}
                 menu.choice "Checkout", -> {checkout}
@@ -89,6 +98,8 @@ class Application
 
     def checkout
         user.check_out_current_cart 
+        sleep 10
+        main_menu
     end
 
     def remove_flavor_from_cart
@@ -97,10 +108,11 @@ class Application
         system 'clear'
         # "clears" the terminal
         prompt.select("What flavor would you like to remove #{user.username}?") do |menu|
-            user.current_cart.icecreams.each do |icecream|
-                menu.choice "#{icecream.flavor}", -> {user.remove_icecream_from_cart(something.id)}
+            user.current_cart.icecreamorders.each do |icecreamorder|
+                menu.choice "#{icecreamorder.icecream.flavor}", -> {user.remove_icecream_from_cart(icecreamorder.id)}
             end
         end
+        main_menu
     end 
 
  
