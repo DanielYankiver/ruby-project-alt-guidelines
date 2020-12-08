@@ -119,7 +119,7 @@ class Application
         user.check_out_current_cart 
         puts render_ascii_art
         sleep 7
-        main_menu
+        exit_app
     end
 
     def remove_flavor_from_cart

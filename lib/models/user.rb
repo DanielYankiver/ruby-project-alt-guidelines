@@ -29,8 +29,6 @@ class User < ActiveRecord::Base
         puts ""
         self.current_cart.update(checked_out: true)
         puts "Thank you for SCOOPING with us!"
-        sleep 10
-        exit_app
     end 
 
 
