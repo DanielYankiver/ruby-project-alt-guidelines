@@ -36,7 +36,7 @@ class Application
         prompt.select("Would you like to login or register?") do |menu|
             menu.choice "Login", -> {login_helper}
             menu.choice "Register", -> {register_helper}
-            menu.choice "Exit", -> {exit_app}
+            menu.choice "Exit", -> {exit_app_with_items_in_cart}
         end
     end
 
@@ -62,14 +62,14 @@ class Application
     def pick_flavor
         system 'clear'
         print TTY::Box.frame "          SCOOPS MENU         "
-        prompt.select("What flavor do you want to add to your cart?") do |menu|
+        prompt.multi_select("What flavor do you want to add to your cart?") do |menu|
             Icecream.all.map do |icecream|
                 menu.choice "#{icecream.flavor}: $#{icecream.price}", -> {user.add_icecream_to_cart(icecream)}
             end 
         end
-        puts "You've added #{user.display_cart.last} ice cream to your cart!"
+        puts "You've added ice cream to your cart!"
         sleep 3
-        main_menu
+        show_current_cart 
     end
     
 
@@ -80,7 +80,7 @@ class Application
         puts " "
         user.past_orders.each do |order|
             order.icecreams.each do |icecream|
-                puts "You picked #{icecream.flavor} on #{order.order_time.strftime("%d/%m/%Y")} at #{order.order_time.strftime("%I:%M %p")}"
+                puts "#{icecream.flavor} on #{order.order_time.strftime("%d/%m/%Y")} at #{order.order_time.strftime("%I:%M %p")}"
             end 
         end
         sleep 2
@@ -118,29 +118,48 @@ class Application
     def checkout
         user.check_out_current_cart 
         puts render_ascii_art
-        sleep 7
+        sleep 9
         exit_app
     end
 
     def remove_flavor_from_cart
         user.reload
         system 'clear'
-        prompt.select("What flavor would you like to remove, #{user.username}?") do |menu|
+        prompt.multi_select("What flavor would you like to remove, #{user.username}?") do |menu|
             user.current_cart.icecreamorders.each do |icecreamorder|
                 menu.choice "#{icecreamorder.icecream.flavor}", -> {user.remove_icecream_from_cart(icecreamorder.id)}
             end
         end
         puts "Your cart has been updated!"
         sleep 2 
-        show_current_cart 
+        if user.current_cart.icecreamorders.empty?
+            main_menu
+        else 
+            show_current_cart 
+        end 
     end 
 
     def exit_app 
         system 'clear'
-        puts "🍦🍦🍦  SCOOP YOU LATER  🍦🍦🍦"
+        if user.current_cart.icecreamorders.empty?
+            puts "🍦🍦🍦  SCOOP YOU LATER  🍦🍦🍦"
+        else 
+            prompt.select("You have items in you cart, #{user.username}. Are you sure you want to exit?") do |menu|
+                menu.choice "Show Current Cart", -> {show_current_cart}
+                menu.choice "Checkout", -> {checkout}
+                menu.choice "Exit App", -> {exit_app_with_items_in_cart}
+            end
+        end 
         sleep 2
         exit
     end
+
+    def exit_app_with_items_in_cart
+        system 'clear'
+        puts "🍦🍦🍦  SCOOP YOU LATER  🍦🍦🍦"
+        sleep 2
+        exit
+    end 
 
     def render_ascii_art
         File.readlines("lib/Icecream.txt") do |line|
