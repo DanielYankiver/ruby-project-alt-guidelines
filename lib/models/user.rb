@@ -28,7 +28,9 @@ class User < ActiveRecord::Base
         puts "Total: $#{current_cart.total_price}"
         puts ""
         self.current_cart.update(checked_out: true)
-        puts "Thank you for SCOOPING with us. Scoop you later 🍦"
+        puts "Thank you for SCOOPING with us!"
+        sleep 10
+        exit_app
     end 
 
 
@@ -73,9 +75,9 @@ class User < ActiveRecord::Base
         puts " "
         puts "You're one scoop away from picking your ice cream!"
         puts " "
-        puts "What is your username?"
+        puts "What do you want your username to be?"
         username = gets.chomp
-        puts "What is your password?"
+        puts "What do you want your password to be?"
         password = gets.chomp
 
         user = User.find_by(username: username)

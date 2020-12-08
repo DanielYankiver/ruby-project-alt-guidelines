@@ -9,6 +9,7 @@ class Application
 
     def greet
         clear_welcome_ascii
+        sleep 5
         puts "Loading the scoops shop🍦🍦🍦"
         sleep 1
         clear_welcome_ascii
@@ -50,7 +51,7 @@ class Application
     def main_menu
         user.reload
         system 'clear'
-        prompt.select("Welcome, #{user.username}! What do you want to do?") do |menu|
+        prompt.select("What do you want to do, #{user.username}?") do |menu|
             menu.choice "View All Flavors and Pick a Scoop", -> {pick_flavor}
             menu.choice "See My Past Orders", -> {see_my_past_orders}
             menu.choice "Show Current Cart", -> {show_current_cart}
@@ -131,7 +132,7 @@ class Application
         end
         puts "Your cart has been updated!"
         sleep 2 
-        main_menu
+        show_current_cart 
     end 
 
     def exit_app 
